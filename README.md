@@ -48,7 +48,7 @@ Unpacking objects: 100% (12/12), done.
 cd compilers
 ```
 
-8. **Optional** Set up your Gravatar with your *@wit.edu* email address (that way, people can associate your user name with your face).
+8. **Optional** Set up your [Gravatar](http://en.gravatar.com/) with your *@wit.edu* email address (that way, people can associate your user name with your face).
 
 9. **Optional** Set up SSH keys (that way, you won't need to type in your password when pushing repositories).
 
