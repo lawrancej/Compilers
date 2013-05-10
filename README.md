@@ -13,7 +13,7 @@ ssh-keygen -t rsa # Just press enter until it's done
 ```
 
 3. Set up a [Bitbucket](http://bitbucket.org) or [Github](http://github.com) account. Use your `@wit.edu` email address. If using Github, [you must request private repositories.](http://github.com/edu)
-4. [Email me your user name and tell me which service you're using.](lawrancej@wit.edu)
+4. [Email me your user name and tell me which service you're using.](mailto:lawrancej@wit.edu)
 5. Clone (don't fork) this repository.
 
     ```bash
