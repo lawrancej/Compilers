@@ -31,8 +31,8 @@
 	Copy the public key to the clipboard.
 
 		cat ~/.ssh/id_rsa.pub > /dev/clipboard # On Windows
-		cat ~/.ssh/id_rsa.pub | pbcopy # On Mac OS X
-		cat ~/.ssh/id_rsa.pub | xclip  # On Linux
+		cat ~/.ssh/id_rsa.pub | pbcopy         # On Mac OS X
+		cat ~/.ssh/id_rsa.pub | xclip          # On Linux
 
 	Paste your public SSH key into the key field in Bitbucket or [Github](https://github.com/settings/ssh) (On Bitbucket, navigate to your user -> Manage account -> SSH keys). For the title, use a nickname for your machine.
 
@@ -49,7 +49,7 @@
 		Cloning into 'compilers'...
 		remote: Counting objects: 12, done.
 		remote: Compressing objects: 100% (10/10), done.
-		emote: Total 12 (delta 1), reused 0 (delta 0)
+		remote: Total 12 (delta 1), reused 0 (delta 0)
 		Unpacking objects: 100% (12/12), done.
 
 9. Go into the repository you just cloned.
@@ -71,3 +71,55 @@
 	On Bitbucket, go to your private repository, click the gear icon, and select **Access management**. Enter `lawrancej` under Users and select **Admin**. Click Add.
 
 	On Github, go to your private repository, click **Settings**, click **Collaborators**. Enter `lawrancej`. Click Add.
+
+# Work submission
+
+1. Check the status of your repository.
+
+		git status
+
+	**Untracked files** are not in version control.
+	**Changes not staged for commit** are revisions that are not yet recorded into a commit.
+	**Changes to be committed** are staged, but not yet recorded into a commit.
+
+2. Review your changes.
+
+		git diff
+
+	Use this information to decide how to proceed.
+
+3. Add files to git as necessary.
+
+		git add new.file.here another.file.here
+
+4. Record your changes into a commit.
+
+		git commit -m "Completed lab 1."
+
+5. When you are ready to submit work, push it to your private repository.
+
+		git push me master
+
+# Get new course material
+
+I will post new material frequently. Pull (fetch and merge) to receive updates.
+
+	git pull origin master
+
+Occasionally, this command won't work because we made conflicting changes. To fix a merge conflict, look for conflict markers and revise as necessary. This command makes it easier:
+
+	git mergetool
+
+If you want to keep only my changes, checkout their version.
+
+	git checkout --theirs some.file.goes.here
+
+If you want to keep only your changes, checkout our version.
+
+	git checkout --ours some.file.goes.here
+
+If you are thoroughly confused, examine the complete history to see what's going on.
+
+	gitk --all &
+
+**Note:** Even though you have removed conflict markers, you must still add files to git and commit as usual to resolve the merge conflict.
