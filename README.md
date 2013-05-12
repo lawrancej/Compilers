@@ -123,3 +123,11 @@ If you are thoroughly confused, examine the complete history to see what's going
 	gitk --all &
 
 **Note:** Even though you have removed conflict markers, you must still add files to git and commit as usual to resolve the merge conflict.
+
+# References
+
+* [Atlassian Git Tutorials](http://www.atlassian.com/git/)
+* [Pro Git](http://git-scm.com/book)
+* [Git Reference](http://gitref.org/)
+* [Git Immersion](http://gitimmersion.com/)
+* [Try Git](http://try.github.com/)
