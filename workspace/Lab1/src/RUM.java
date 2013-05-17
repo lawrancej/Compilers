@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class RUM {
 	public interface Node {
@@ -145,6 +146,7 @@ public class RUM {
 		
 	}
 	public static class Interpreter implements Visitor<Void> {
+
 		byte[] cell;
 		int pointer;
 		@Override
@@ -203,14 +205,39 @@ public class RUM {
 			return null;
 		}
 	}
+	int i = 0;
+	public Sequence sequenceParse(String source) {
+		LinkedList<Node> nodes = new LinkedList<Node>();
+		while (i < source.length()) {
+			char command = source.charAt(i);
+			i++;
+			switch (command) {
+			case '<': nodes.add(new Left()); break;
+			case '>': nodes.add(new Right()); break;
+			case '+': nodes.add(new Increment()); break;
+			case '-': nodes.add(new Decrement()); break;
+			case '.': nodes.add(new Output()); break;
+			case ',': nodes.add(new Input()); break;
+			case '[': nodes.add(new Loop(sequenceParse(source))); break;
+			case ']':
+				return new Sequence(nodes.toArray(new Node[0]));
+			}
+		}
+		return new Sequence(nodes.toArray(new Node[0]));
+	}
+	public Program parse (String source) {
+		return new Program(sequenceParse(source));
+	}
 	public static void main(String[] args) {
-		Program program = new Program(new Sequence(
+		/* Program program = new Program(new Sequence(
 				new Increment(), new Loop(new Sequence(
 						new Output(), new Increment()))));
+		*/
+		Program program = new RUM().parse("++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
 		Interpreter interpreter = new Interpreter();
 		program.accept(interpreter);
-		Printer printer = new Printer();
-		printer.visit(program);
+//		Printer printer = new Printer();
+//		printer.visit(program);
 	}
 	
 }
