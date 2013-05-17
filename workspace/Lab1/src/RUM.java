@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class RUM {
 	public interface Node {
@@ -145,6 +146,7 @@ public class RUM {
 		
 	}
 	public static class Interpreter implements Visitor<Void> {
+
 		byte[] cell;
 		int pointer;
 		@Override
@@ -203,14 +205,39 @@ public class RUM {
 			return null;
 		}
 	}
+	int i = 0;
+	public Sequence parseSequence(String source) {
+		LinkedList<Node> sequence = new LinkedList<Node>();
+		/* Consume one character at a time */
+		while (i < source.length()) {
+			char command = source.charAt(i);
+			i++;
+			/* Add the proper Node for each command to the sequence */
+			switch (command) {
+			case '>': sequence.add(new Right()); break;
+			case '<': sequence.add(new Left()); break;
+			case '+': sequence.add(new Increment()); break;
+			case '-': sequence.add(new Decrement()); break;
+			case '.': sequence.add(new Output()); break;
+			case ',': sequence.add(new Input()); break;
+			case '[': sequence.add(new Loop(parseSequence(source))); break;
+			case ']': return new Sequence(sequence.toArray(new Node[0]));
+			}
+		}
+		return new Sequence(sequence.toArray(new Node[0]));
+	}
+	public Program parse (String source) {
+		return new Program(parseSequence(source));
+	}
 	public static void main(String[] args) {
-		Program program = new Program(new Sequence(
-				new Increment(), new Loop(new Sequence(
-						new Output(), new Increment()))));
+//		Program program = new Program(new Sequence(
+//				new Increment(), new Loop(new Sequence(
+//						new Output(), new Increment()))));
+		Program program = new RUM().parse("++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
 		Interpreter interpreter = new Interpreter();
 		program.accept(interpreter);
-		Printer printer = new Printer();
-		printer.visit(program);
+//		Printer printer = new Printer();
+//		printer.visit(program);
 	}
 	
 }
