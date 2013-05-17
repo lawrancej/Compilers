@@ -145,8 +145,8 @@ public class RUM {
 		
 	}
 	public static class Interpreter implements Visitor<Void> {
-		byte[] cell = new byte[30000];
-		int pointer = 0;
+		byte[] cell;
+		int pointer;
 		@Override
 		public Void visit(Left node) {
 			pointer--;
@@ -190,6 +190,8 @@ public class RUM {
 		}
 		@Override
 		public Void visit(Program node) {
+			cell = new byte[30000];
+			pointer = 0;
 			node.child.accept(this);
 			return null;
 		}
@@ -207,7 +209,8 @@ public class RUM {
 						new Output(), new Increment()))));
 		Interpreter interpreter = new Interpreter();
 		program.accept(interpreter);
-//		printer.visit(program);
+		Printer printer = new Printer();
+		printer.visit(program);
 	}
 	
 }
