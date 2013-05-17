@@ -30,6 +30,6 @@ Complete the following.
     * AnotherCompiler. Output code for another language, or even *gasp* assembly code that works with `masm`, `as` or `nasm`.
     * Optimizer. Traverse through the AST and create a new AST that improves execution performance (e.g., replace runs of the same instruction with a single instruction, so ++++ becomes a single Increment node with a count of 4, or replace a Sequence pattern with a special Node). This would involve changing the classes implementing Node, or even implementing new Node types.
 
-6. Test that all of this works for valid RUM programs. For example, this is "Hello, World!" in RUM:
+Be sure to test that all of this works for valid RUM programs. For example, this is "Hello, World!" in RUM:
 
         (++++++++++<[>+>+<<-]>>[<<+>>-])>::::::::::::::<<<<<<<--------.>>>---------.+++++++..>---------.<<<<<<<------.<--------.>>>>>---.>>>.+++.<.--------.<<<<<<<+.
