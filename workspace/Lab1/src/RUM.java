@@ -206,33 +206,33 @@ public class RUM {
 		}
 	}
 	int i = 0;
-	public Sequence sequenceParse(String source) {
-		LinkedList<Node> nodes = new LinkedList<Node>();
+	public Sequence parseSequence(String source) {
+		LinkedList<Node> sequence = new LinkedList<Node>();
+		/* Consume one character at a time */
 		while (i < source.length()) {
 			char command = source.charAt(i);
 			i++;
+			/* Add the proper Node for each command to the sequence */
 			switch (command) {
-			case '<': nodes.add(new Left()); break;
-			case '>': nodes.add(new Right()); break;
-			case '+': nodes.add(new Increment()); break;
-			case '-': nodes.add(new Decrement()); break;
-			case '.': nodes.add(new Output()); break;
-			case ',': nodes.add(new Input()); break;
-			case '[': nodes.add(new Loop(sequenceParse(source))); break;
-			case ']':
-				return new Sequence(nodes.toArray(new Node[0]));
+			case '>': sequence.add(new Right()); break;
+			case '<': sequence.add(new Left()); break;
+			case '+': sequence.add(new Increment()); break;
+			case '-': sequence.add(new Decrement()); break;
+			case '.': sequence.add(new Output()); break;
+			case ',': sequence.add(new Input()); break;
+			case '[': sequence.add(new Loop(parseSequence(source))); break;
+			case ']': return new Sequence(sequence.toArray(new Node[0]));
 			}
 		}
-		return new Sequence(nodes.toArray(new Node[0]));
+		return new Sequence(sequence.toArray(new Node[0]));
 	}
 	public Program parse (String source) {
-		return new Program(sequenceParse(source));
+		return new Program(parseSequence(source));
 	}
 	public static void main(String[] args) {
-		/* Program program = new Program(new Sequence(
-				new Increment(), new Loop(new Sequence(
-						new Output(), new Increment()))));
-		*/
+//		Program program = new Program(new Sequence(
+//				new Increment(), new Loop(new Sequence(
+//						new Output(), new Increment()))));
 		Program program = new RUM().parse("++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
 		Interpreter interpreter = new Interpreter();
 		program.accept(interpreter);
