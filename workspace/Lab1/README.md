@@ -26,11 +26,11 @@ Complete the following.
 4. Write a **Compiler** class (implementing Visitor) for RUM (it's just like the Printer class, except that it should print out equivalent code in a language of your choice such as Java, C++, Python, or Ruby).
 5. Implement one (or more) of the following Visitor classes (or suggest something else to me):
 
-    * **VisualInterpreter**. Render the contents of the array and pointer into a nice GUI.
+   * **VisualInterpreter**. Render the contents of the array and pointer into a nice GUI.
 
-    * **AnotherCompiler**. Output code for another language, or even *gasp* assembly code that works with `masm`, `as` or `nasm`.
+   * **AnotherCompiler**. Output code for another language, or even *gasp* assembly code that works with `masm`, `as` or `nasm`.
 
-    * **Optimizer**. Traverse through the AST and create a new AST that improves execution performance (e.g., replace runs of the same instruction with a single instruction, so ++++ becomes a single Increment node with a count of 4, or replace a Sequence pattern with a special Node). This would involve changing the classes implementing Node, or even implementing new Node types.
+   * **Optimizer**. Traverse through the AST and create a new AST that improves execution performance (e.g., replace runs of the same instruction with a single instruction, so ++++ becomes a single Increment node with a count of 4, or replace a Sequence pattern with a special Node). This would involve changing the classes implementing Node, or even implementing new Node types.
 
 Be sure to test that all of this works for valid RUM programs. For example, this is "Hello, World!" in RUM:
 
