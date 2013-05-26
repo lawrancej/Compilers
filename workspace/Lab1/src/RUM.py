@@ -4,6 +4,7 @@
 # Everything that's broken is due to the professor ;-)
 
 from __future__ import print_function
+import sys
 
 class Printer(object):
     def visit(self, node):
@@ -34,8 +35,8 @@ class Interpreter(object):
         if isinstance(node, Increment):
             self.cell[self.pointer] = (self.cell[self.pointer] + 1) % 256
         if isinstance(node, Decrement):
-            self.cell[self.pointer] -= 1
-        if isinstance(node, Input): pass # Derp, ran out of time
+            self.cell[self.pointer] = (self.cell[self.pointer] - 1) % 256
+        if isinstance(node, Input): sys.stdin.read(1) # Beware: untested
         if isinstance(node, Output): print(chr(self.cell[self.pointer]), end='')
         if isinstance(node, Loop):
             while self.cell[self.pointer] != 0:
@@ -67,8 +68,32 @@ class Increment(Node): pass
 class Right(Node): pass
 class Left(Node): pass
 
+i = 0
+
+def parse(string):
+    sequence = []
+    global i
+    while i < len(string):
+        ch = string[i]
+        i += 1
+        if ch == '<': sequence.append(Left())
+        if ch == '>': sequence.append(Right())
+        if ch == '+': sequence.append(Increment())
+        if ch == '-': sequence.append(Decrement())
+        if ch == '.': sequence.append(Output())
+        if ch == ',': sequence.append(Input())
+        if ch == '[': sequence.append(Loop(parse(string)))
+        if ch == ']': return Sequence(*sequence)
+    return Sequence(*sequence)
+
+def parseProgram(string):
+    global i
+    i = 0
+    return Program(parse(string))
+
 if __name__ == '__main__':
-    rootNode = Program(Sequence(Increment(), Loop(Sequence(Output(), Increment()))))
+#    rootNode = Program(Sequence(Increment(), Loop(Sequence(Output(), Increment()))))
+    rootNode = parseProgram("++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.")
     printer = Printer()
     rootNode.accept(printer)
     interpreter = Interpreter()
