@@ -36,7 +36,7 @@ class Interpreter(object):
         if isinstance(node, Decrement):
             self.cell[self.pointer] -= 1
         if isinstance(node, Input): pass # Derp, ran out of time
-        if isinstance(node, Output): print(str(self.cell[self.pointer]), end='')
+        if isinstance(node, Output): print(chr(self.cell[self.pointer]), end='')
         if isinstance(node, Loop):
             while self.cell[self.pointer] != 0:
                 node.child.accept(self)
