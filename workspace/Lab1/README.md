@@ -10,8 +10,6 @@ Complete the following.
 2. Extend the **Visitor** interface to handle the additional **Node** types.
 3. Extend classes implementing **Visitor** to handle the new `visit` methods for each new **Node** type. In particular, extend the **Interpreter** and **Printer** for RUM. Inside the **Interpreter** class, you'll need this:
 
-        private byte[] array;
-        private int pointer;
         public interface Procedure {
             void execute();
         }
