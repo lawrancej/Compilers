@@ -35,3 +35,5 @@ Complete the following.
 Be sure to test that all of this works for valid RUM programs. For example, this is "Hello, World!" in RUM:
 
         (++++++++++<[>+>+<<-]>>[<<+>>-])>::::::::::::::<<<<<<<--------.>>>---------.+++++++..>---------.<<<<<<<------.<--------.>>>>>---.>>>.+++.<.--------.<<<<<<<+.
+
+Try to see if it works with one of [these programs](http://esoteric.sange.fi/brainfuck/bf-source/prog/), particularly one that accepts input from the user.
