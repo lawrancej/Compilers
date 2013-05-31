@@ -6,7 +6,7 @@ In this lab, we will write a compiler (among other things) for RUM. Use RUM.java
 
 Complete the following.
 
-1. Add new classes implementing **Node** for the additional Pbrain and RUM constructs (e.g., **ProcedureDefinition**, **ProcedureInvocation**).
+1. Add new classes implementing **Node** for the additional Pbrain and RUM constructs (e.g., **ProcedureDefinition**, **ProcedureInvocation**, **Repetition**, **Strings**, **Breakpoint**).
 2. Extend the **Visitor** interface to handle the additional **Node** types.
 3. Extend classes implementing **Visitor** to handle the new `visit` methods for each new **Node** type. In particular, extend the **Interpreter** and **Printer** for RUM. Inside the **Interpreter** class, you'll need this:
 
@@ -21,7 +21,18 @@ Complete the following.
 
     It is NOT necessary to make multiple passes through the source code. Also: `byte` in Java is signed. To make `byte b` unsigned, do: `b & 0xFF`.
 
+    **Hints** When handling **ProcedureInvocation**, do this (in Java):
+
+        procedures[cell[pointer]].execute();
+
+    When handling **Strings**, it also affects input, because a String in RUM is inserted at the beginning of the input buffer. Null terminated means the String has a zero `'\0'` character at the end.
+
+    When handling **Repetition**, it's only necessary to worry about the primitive commands, not loops or procedure definitions.
+
 4. Write a **Compiler** class (implementing Visitor) for RUM (it's just like the Printer class, except that it should print out equivalent code in a language of your choice such as Java, C++, Python, or Ruby).
+
+    **Hint** Print out the boilerplate (e.g., imports and includes) when visiting the **Program** node.
+
 5. Implement one (or more) of the following Visitor classes (or suggest something else to me):
 
    * **VisualInterpreter**. Render the contents of the array and pointer into a nice GUI.
