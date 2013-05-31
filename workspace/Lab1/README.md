@@ -21,9 +21,11 @@ Complete the following.
 
     It is NOT necessary to make multiple passes through the source code. Also: `byte` in Java is signed. To make `byte b` unsigned, do: `b & 0xFF`.
 
-    **Hints** When handling **ProcedureInvocation**, do this (in Java):
+    **Hints:** When handling **ProcedureInvocation**, do this (in Java):
 
         procedures[cell[pointer]].execute();
+
+    To implement **ProcedureDefinition**, use anonymous inner classes (Java) or anonymous functions (Python, C#/C++)
 
     When handling **Strings**, it also affects input, because a String in RUM is inserted at the beginning of the input buffer. Null terminated means the String has a zero `'\0'` character at the end.
 
