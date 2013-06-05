@@ -11,11 +11,13 @@ public class Regex {
 		T visit(Sequence node);
 		T visit(Or node);
 	}
-	// Print regex
-	// Not allocating new objects everywhere
-	// Compaction - reduce: be smart about constructing new regexen
-	// Caching - re-use: existing objects
-	// Parsing the regex?
+	// 1. Write a visitor to print regex
+	// 2. Speed up the performance by constructing objects wisely
+	// * Reduce:  Use compaction to avoid constructing new objects
+	// * Reuse:   Use caching (memoization) to reuse existing objects
+	// * Recycle: (Java/Python/C# do GC for you, in C++, a visitor would delete trees)
+	// 3. Make the interface a bit nicer. 
+	// Extra credit: parse a string to construct a Regex
 	
 	// Reject everything
 	public static class EmptySet implements Node {
