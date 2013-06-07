@@ -11,15 +11,9 @@ public class Regex {
 		T visit(Sequence node);
 		T visit(Or node);
 	}
-	// 1. Write a visitor to print regex
-	// 2. Speed up the performance by constructing objects wisely
-	// * Reduce:  Use compaction to avoid constructing new objects
-	// * Reuse:   Use caching (memoization) to reuse existing objects
-	// * Recycle: (Java/Python/C# do GC for you, in C++, a visitor would delete trees)
-	// 3. Make the interface a bit nicer. 
-	// Extra credit: parse a string to construct a Regex
 	
 	// Reject everything
+	// FIXME: Singleton
 	public static class EmptySet implements Node {
 		@Override
 		public <T> T accept(Visitor<T> visitor) {
@@ -27,6 +21,7 @@ public class Regex {
 		}
 	}
 	// Matches "" Accept the end of a string
+	// FIXME: Singleton
 	public static class EmptyString implements Node {
 		@Override
 		public <T> T accept(Visitor<T> visitor) {
@@ -34,6 +29,7 @@ public class Regex {
 		}
 	}
 	// Match a single symbol
+	// FIXME: Flyweight
 	public static class Symbol implements Node {
 		char symbol;
 		public Symbol (char symbol) {
@@ -174,7 +170,7 @@ public class Regex {
 		long then = System.nanoTime();
 		for (int i = 0; i < 1000000; i++)
 			Regex.match(
-				new Or(new Symbol('a'), new Symbol('b')), "a");
+				new Sequence(new Symbol('b'), new Sequence(new Symbol('o'), new Symbol('b'))), "a");
 		System.out.println(System.nanoTime() - then);
 	}
 }
