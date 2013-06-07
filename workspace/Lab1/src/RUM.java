@@ -15,8 +15,26 @@ public class RUM {
 		public T visit(Loop node);
 		public T visit(Program node);
 		public T visit(Sequence node);
+		public T visit(ProcedureDefinition node);
+		public T visit(ProcedureInvocation node);
 	}
 	/* Define various node types */
+	public static class ProcedureDefinition implements Node {
+		Node child;
+		public ProcedureDefinition (Node child) {
+			this.child = child;
+		}
+		@Override
+		public <T> T accept(Visitor<T> visitor) {
+			return visitor.visit(this);
+		}
+	}
+	public static class ProcedureInvocation implements Node {
+		@Override
+		public <T> T accept(Visitor<T> visitor) {
+			return visitor.visit(this);
+		}
+	}
 	public static class Left implements Node {
 		@Override
 		public <T> T accept(Visitor<T> visitor) {
@@ -143,10 +161,27 @@ public class RUM {
 			}
 			return null;
 		}
+
+		@Override
+		public Void visit(ProcedureDefinition node) {
+			System.out.print('(');
+			node.child.accept(this);
+			System.out.print(')');
+			return null;
+		}
+
+		@Override
+		public Void visit(ProcedureInvocation node) {
+			System.out.print(':');
+			return null;
+		}
 		
 	}
 	public static class Interpreter implements Visitor<Void> {
-
+		public interface Procedure {
+		    void execute();
+		}
+		private Procedure[] procedures;
 		byte[] cell;
 		int pointer;
 		@Override
@@ -194,6 +229,7 @@ public class RUM {
 		public Void visit(Program node) {
 			cell = new byte[30000];
 			pointer = 0;
+			procedures = new Procedure[256];
 			node.child.accept(this);
 			return null;
 		}
@@ -204,6 +240,23 @@ public class RUM {
 			}
 			return null;
 		}
+		@Override
+		public Void visit(final ProcedureDefinition node) {
+			final Interpreter that = this;
+			procedures[cell[pointer]] = new Procedure() {
+				@Override
+				public void execute() {
+					// Continue traversing through here
+					node.child.accept(that);
+				}
+			};
+			return null;
+		}
+		@Override
+		public Void visit(ProcedureInvocation node) {
+			procedures[cell[pointer]].execute();
+			return null;
+		}
 	}
 	int i = 0;
 	public Sequence parseSequence(String source) {
@@ -212,9 +265,17 @@ public class RUM {
 		while (i < source.length()) {
 			char command = source.charAt(i);
 			i++;
+			/*
+			 * repetition: look ahead: look for digits (once you don't see a digit, stop
+			 * convert teh string into a number
+			 * 
+			 * optimization: look ahead: if you see the same command over and over, keep looking.
+			 * once you see something different stop.
+			 * 
+			 */
 			/* Add the proper Node for each command to the sequence */
 			switch (command) {
-			case '>': sequence.add(new Right()); break;
+			case '>': sequence.add(new Right(/* repetition */)); break;
 			case '<': sequence.add(new Left()); break;
 			case '+': sequence.add(new Increment()); break;
 			case '-': sequence.add(new Decrement()); break;
@@ -222,6 +283,9 @@ public class RUM {
 			case ',': sequence.add(new Input()); break;
 			case '[': sequence.add(new Loop(parseSequence(source))); break;
 			case ']': return new Sequence(sequence.toArray(new Node[0]));
+			case ':': sequence.add(new ProcedureInvocation(/* repetition */)); break;
+			case '(': sequence.add(new ProcedureDefinition(parseSequence(source))); break;
+			case ')': return new Sequence(sequence.toArray(new Node[0]));
 			}
 		}
 		return new Sequence(sequence.toArray(new Node[0]));
@@ -233,7 +297,7 @@ public class RUM {
 //		Program program = new Program(new Sequence(
 //				new Increment(), new Loop(new Sequence(
 //						new Output(), new Increment()))));
-		Program program = new RUM().parse("++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
+		Program program = new RUM().parse("(++++++++++<[>+>+<<-]>>[<<+>>-])>::::::::::::::<<<<<<<--------.>>>---------.+++++++..>---------.<<<<<<<------.<--------.>>>>>---.>>>.+++.<.--------.<<<<<<<+.");
 		Interpreter interpreter = new Interpreter();
 		program.accept(interpreter);
 //		Printer printer = new Printer();
