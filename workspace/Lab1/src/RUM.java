@@ -265,9 +265,17 @@ public class RUM {
 		while (i < source.length()) {
 			char command = source.charAt(i);
 			i++;
+			/*
+			 * repetition: look ahead: look for digits (once you don't see a digit, stop
+			 * convert teh string into a number
+			 * 
+			 * optimization: look ahead: if you see the same command over and over, keep looking.
+			 * once you see something different stop.
+			 * 
+			 */
 			/* Add the proper Node for each command to the sequence */
 			switch (command) {
-			case '>': sequence.add(new Right()); break;
+			case '>': sequence.add(new Right(/* repetition */)); break;
 			case '<': sequence.add(new Left()); break;
 			case '+': sequence.add(new Increment()); break;
 			case '-': sequence.add(new Decrement()); break;
@@ -275,7 +283,7 @@ public class RUM {
 			case ',': sequence.add(new Input()); break;
 			case '[': sequence.add(new Loop(parseSequence(source))); break;
 			case ']': return new Sequence(sequence.toArray(new Node[0]));
-			case ':': sequence.add(new ProcedureInvocation()); break;
+			case ':': sequence.add(new ProcedureInvocation(/* repetition */)); break;
 			case '(': sequence.add(new ProcedureDefinition(parseSequence(source))); break;
 			case ')': return new Sequence(sequence.toArray(new Node[0]));
 			}
