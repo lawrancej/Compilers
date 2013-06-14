@@ -106,7 +106,10 @@ public class Regex {
 		// getInstance will return a Node but possibly not a Star
 		// if the child is an emptyString, return emptyString
 		public static Node getInstance(Node child) {
-			return null;
+			// Compaction (don't bother creating junk)
+			if (child == EmptySet.getInstance())
+				return child;
+			return new Star(child); // Use the flyweight pattern here
 		}
 		@Override
 		public <T> T accept(Visitor<T> visitor) {
@@ -141,6 +144,7 @@ public class Regex {
 	}
 	// Rewrite the regex to match
 	// the rest of a string without the first char c.
+	// We shouldn't use the new operator in the visit methods
 	public static class Derivative implements Visitor<Node> {
 		Nullable nullable = new Nullable();
 		public char c; // Derive with respect to c
