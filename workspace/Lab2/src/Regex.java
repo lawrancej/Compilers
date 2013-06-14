@@ -94,11 +94,14 @@ public class Regex {
 	}
 	// Match (child)*
 	// FIXME: Flyweight
+	// FIXME: Compaction
 	public static class Star implements Node {
 		Node child;
 		public Star(Node child) {
 			this.child = child;
 		}
+		// getInstance will return a Node but possibly not a Star
+		// if the child is an emptyString, return emptyString
 		@Override
 		public <T> T accept(Visitor<T> visitor) {
 			return visitor.visit(this);
@@ -225,6 +228,11 @@ public class Regex {
 		return regex.accept(nullable);
 	}
 	public static void main(String[] args) {
+		String s = "H";
+		s += "ello";
+		if("Hello".equals(s)) {
+			System.out.println("WTF");
+		}
 		// Does a|b match a?
 		long then = System.nanoTime();
 		for (int i = 0; i < 1; i++)
