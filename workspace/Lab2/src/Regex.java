@@ -11,10 +11,52 @@ public class Regex {
 		T visit(Sequence node);
 		T visit(Or node);
 	}
-	
+	// Item 1:
+	public static class Printer implements Visitor<String> {
+
+		@Override
+		public String visit(EmptySet node) {
+			return "∅";
+		}
+
+		@Override
+		public String visit(EmptyString node) {
+			return "ε";
+		}
+
+		@Override
+		public String visit(Symbol node) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String visit(Star node) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String visit(Sequence node) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String visit(Or node) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+	}
 	// Reject everything
-	// FIXME: Singleton
+	// FIXME: Singleton: only one instance of this class
 	public static class EmptySet implements Node {
+		private static EmptySet emptySet = new EmptySet();
+		private EmptySet() {}
+		public static EmptySet getInstance() {
+			return emptySet;
+		}
 		@Override
 		public <T> T accept(Visitor<T> visitor) {
 			return visitor.visit(this);
@@ -23,6 +65,7 @@ public class Regex {
 	// Matches "" Accept the end of a string
 	// FIXME: Singleton
 	public static class EmptyString implements Node {
+		private EmptyString() {}
 		@Override
 		public <T> T accept(Visitor<T> visitor) {
 			return visitor.visit(this);
@@ -80,22 +123,22 @@ public class Regex {
 		public char c; // Derive with respect to c
 		@Override
 		public Node visit(EmptySet node) {
-			// Dc(0) = 0 
+			// Dc(0) = 0
 			return node;
 		}
 		@Override
 		public Node visit(EmptyString node) {
 			// Dc("") = 0
-			return new EmptySet();
+			return EmptySet.getInstance();
 		}
 		@Override
 		public Node visit(Symbol node) {
 			// Dc(c) = ""
 			if (c == node.symbol)
-				return new EmptyString();
-			// Dc(c') = 0 if c is not c' 
+				return new EmptyString(); // Do the same thing for the empty string
+			// Dc(c') = 0 if c is not c'
 			else
-				return new EmptySet();
+				return EmptySet.getInstance();
 		}
 		@Override
 		public Node visit(Star node) {
@@ -155,11 +198,15 @@ public class Regex {
 		// Two visitors
 		Derivative d = new Derivative();
 		Nullable nullable = new Nullable();
-		
-		// Just compute the derivative with respect to the first character, then the second, then the third and so on. 
+		// For debugging, create the printer here
+		Printer printer = new Printer();
+
+		// Just compute the derivative with respect to the first character, then the second, then the third and so on.
 		for (char c : string.toCharArray()) {
 			d.c = c; // Set the first character
 			regex = regex.accept(d); // regex should match what it used to match, sans first character c
+			// Print out the new regex
+			System.out.println(regex.accept(printer));
 		}
 		// If the final language contains the empty string, then the original string was in the original language.
 		// Does the regex match the empty string?
@@ -168,7 +215,7 @@ public class Regex {
 	public static void main(String[] args) {
 		// Does a|b match a?
 		long then = System.nanoTime();
-		for (int i = 0; i < 1000000; i++)
+		for (int i = 0; i < 1; i++)
 			Regex.match(
 				new Sequence(new Symbol('b'), new Sequence(new Symbol('o'), new Symbol('b'))), "a");
 		System.out.println(System.nanoTime() - then);

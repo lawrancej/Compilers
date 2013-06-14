@@ -11,7 +11,7 @@
 	* Reduce:  Avoid constructing new objects
 	* Reuse:   Use caching (memoization) to reuse existing objects
 
-		Make **EmptySet** and **EmptyString** singletons.
+		Make **EmptySet** and **EmptyString** [singletons](http://en.wikipedia.org/wiki/Singleton_pattern).
 		Make **Symbol**, **Star**, **Sequence**, **Or** into Flyweights.
 		Compaction: [Compaction (see here for details)](http://matt.might.net/articles/parsing-with-derivatives/).
 
