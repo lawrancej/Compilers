@@ -11,8 +11,8 @@
 	* Reduce:  Avoid constructing new objects
 	* Reuse:   Use caching (memoization) to reuse existing objects
 
-		Make **EmptySet** and **EmptyString** singletons.
-		Make **Symbol**, **Star**, **Sequence**, **Or** into Flyweights.
+		Make **EmptySet** and **EmptyString** [singletons](http://en.wikipedia.org/wiki/Singleton_pattern).
+		Make **Symbol**, **Star**, **Sequence**, **Or** into [Flyweights](http://en.wikipedia.org/wiki/Flyweight_pattern).
 		Compaction: [Compaction (see here for details)](http://matt.might.net/articles/parsing-with-derivatives/).
 
 	* Recycle: (Java/Python/C# do GC for you, in C++, a visitor would delete trees)
