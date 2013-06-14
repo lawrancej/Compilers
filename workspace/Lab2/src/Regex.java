@@ -98,6 +98,7 @@ public class Regex {
 	// FIXME: Flyweight
 	// FIXME: Compaction
 	public static class Star implements Node {
+		private static HashMap<Node, Star> map = new HashMap<Node, Star>();
 		Node child;
 		// Make the constructor private and have a hashmap here too
 		private Star(Node child) {
@@ -250,7 +251,9 @@ public class Regex {
 		long then = System.nanoTime();
 		for (int i = 0; i < 1; i++)
 			Regex.match(
-				new Sequence(new Symbol('b'), new Sequence(new Symbol('o'), new Symbol('b'))), "a");
+				new Sequence(new Symbol('b'),
+						new Sequence(new Symbol('o'),
+								new Symbol('b'))), "a");
 		System.out.println(System.nanoTime() - then);
 	}
 }
