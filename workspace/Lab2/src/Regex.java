@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 
 public class Regex {
 	public interface Node {
@@ -75,8 +77,15 @@ public class Regex {
 	// FIXME: Flyweight
 	public static class Symbol implements Node {
 		char symbol;
-		public Symbol (char symbol) {
+		private static HashMap<Character, Symbol> map = new HashMap<Character, Symbol>();
+		private Symbol (char symbol) {
 			this.symbol = symbol;
+		}
+		public static Symbol getInstance(char symbol) {
+			if (!map.containsKey(symbol)) {
+				map.put(symbol, new Symbol(symbol));
+			}
+			return map.get(symbol);
 		}
 		@Override
 		public <T> T accept(Visitor<T> visitor) {
@@ -84,6 +93,7 @@ public class Regex {
 		}
 	}
 	// Match (child)*
+	// FIXME: Flyweight
 	public static class Star implements Node {
 		Node child;
 		public Star(Node child) {
@@ -95,6 +105,7 @@ public class Regex {
 		}
 	}
 	// Match a followed by b
+	// FIXME: Flyweight
 	public static class Sequence implements Node {
 		Node a, b;
 		public Sequence(Node a, Node b) {
@@ -106,6 +117,7 @@ public class Regex {
 		}
 	}
 	// Match a or b
+	// FIXME: Flyweight
 	public static class Or implements Node {
 		Node a, b;
 		public Or(Node a, Node b) {
