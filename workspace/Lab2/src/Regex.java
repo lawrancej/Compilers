@@ -78,9 +78,11 @@ public class Regex {
 	public static class Symbol implements Node {
 		char symbol;
 		private static HashMap<Character, Symbol> map = new HashMap<Character, Symbol>();
+		// It's private, as in, do not use outside this class
 		private Symbol (char symbol) {
 			this.symbol = symbol;
 		}
+		// How we actually "construct" a symbol
 		public static Symbol getInstance(char symbol) {
 			if (!map.containsKey(symbol)) {
 				map.put(symbol, new Symbol(symbol));
@@ -97,11 +99,15 @@ public class Regex {
 	// FIXME: Compaction
 	public static class Star implements Node {
 		Node child;
-		public Star(Node child) {
+		// Make the constructor private and have a hashmap here too
+		private Star(Node child) {
 			this.child = child;
 		}
 		// getInstance will return a Node but possibly not a Star
 		// if the child is an emptyString, return emptyString
+		public static Node getInstance(Node child) {
+			return null;
+		}
 		@Override
 		public <T> T accept(Visitor<T> visitor) {
 			return visitor.visit(this);
@@ -109,6 +115,7 @@ public class Regex {
 	}
 	// Match a followed by b
 	// FIXME: Flyweight
+	// FIXME: Compaction
 	public static class Sequence implements Node {
 		Node a, b;
 		public Sequence(Node a, Node b) {
@@ -121,6 +128,7 @@ public class Regex {
 	}
 	// Match a or b
 	// FIXME: Flyweight
+	// FIXME: Compaction
 	public static class Or implements Node {
 		Node a, b;
 		public Or(Node a, Node b) {
@@ -219,9 +227,10 @@ public class Regex {
 		// Just compute the derivative with respect to the first character, then the second, then the third and so on.
 		for (char c : string.toCharArray()) {
 			d.c = c; // Set the first character
-			regex = regex.accept(d); // regex should match what it used to match, sans first character c
+			// For debugging purposes,
 			// Print out the new regex
 			System.out.println(regex.accept(printer));
+			regex = regex.accept(d); // regex should match what it used to match, sans first character c
 		}
 		// If the final language contains the empty string, then the original string was in the original language.
 		// Does the regex match the empty string?
@@ -230,7 +239,7 @@ public class Regex {
 	public static void main(String[] args) {
 		String s = "H";
 		s += "ello";
-		if("Hello".equals(s)) {
+		if("Hello" == (s)) {
 			System.out.println("WTF");
 		}
 		// Does a|b match a?
