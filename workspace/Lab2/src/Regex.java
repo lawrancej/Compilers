@@ -13,7 +13,7 @@ public class Regex {
 		T visit(Sequence node);
 		T visit(Or node);
 	}
-	// Item 1:
+	// FIXME: Start here. 
 	public static class Printer implements Visitor<String> {
 
 		@Override
@@ -28,14 +28,12 @@ public class Regex {
 
 		@Override
 		public String visit(Symbol node) {
-			// TODO Auto-generated method stub
-			return null;
+			return ""+node.symbol;
 		}
 
 		@Override
 		public String visit(Star node) {
-			// TODO Auto-generated method stub
-			return null;
+			return "(" + node.child.accept(this) + ")*";
 		}
 
 		@Override
@@ -237,6 +235,7 @@ public class Regex {
 			System.out.println(regex.accept(printer));
 			regex = regex.accept(d); // regex should match what it used to match, sans first character c
 		}
+		System.out.println(regex.accept(printer));
 		// If the final language contains the empty string, then the original string was in the original language.
 		// Does the regex match the empty string?
 		return regex.accept(nullable);
@@ -250,10 +249,14 @@ public class Regex {
 		// Does a|b match a?
 		long then = System.nanoTime();
 		for (int i = 0; i < 1; i++)
+			// bob
+			// ob
+			// b
+			// emptystring
 			Regex.match(
 				new Sequence(new Symbol('b'),
 						new Sequence(new Symbol('o'),
-								new Symbol('b'))), "a");
+								new Symbol('b'))), "bob");
 		System.out.println(System.nanoTime() - then);
 	}
 }
