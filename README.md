@@ -133,3 +133,4 @@ If you are thoroughly confused, examine the complete history to see what's going
 * [Git Reference](http://gitref.org/)
 * [Git Immersion](http://gitimmersion.com/)
 * [Try Git](http://try.github.com/)
+* [Git Branching](http://pcottle.github.io/learnGitBranching/?demo)
