@@ -61,9 +61,4 @@
 16. What is optimization?
 17. How do compiler construction techniques apply to "normal" programs?
 
-
-
-
-
-
-
+	Parsing configuration files, or anything that deals with string input, will need to interpret it.
