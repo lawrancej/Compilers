@@ -6,6 +6,10 @@
 
 	**Examples:** LLVM, gcc, javac, msvc, LaTeX, Markdown processors, VHDL/Verilog hardware compilers.
 
+1. C compilers are written in C. How can that be?
+
+	[Ken Thompson offers an explanation](http://cm.bell-labs.com/who/ken/trust.html).
+
 2. What is an interpeter, and how does it differ from a compiler?
 
 	An interpreter runs source code, whereas a compiler translates source code into machine code to run.
