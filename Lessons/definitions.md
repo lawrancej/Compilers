@@ -8,7 +8,7 @@
 
 1. C compilers are written in C. How can that be?
 
-	[Ken Thompson offers an explanation](http://cm.bell-labs.com/who/ken/trust.html).
+	[Ken Thompson offers an explanation](http://cm.bell-labs.com/who/ken/trust.html). Got that? Good. [Now, here's how to counteract this problem Ken discovered.](http://www.dwheeler.com/trusting-trust/)
 
 2. What is an interpeter, and how does it differ from a compiler?
 
