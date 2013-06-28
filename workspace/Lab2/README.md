@@ -20,4 +20,4 @@
 	E.g., Given a string, produce the regex that matches that string literally.
 
 
-Extra credit: parse a string to construct a Regex
+Extra credit: [parse a string to construct a Regex](http://matt.might.net/articles/parsing-regex-with-recursive-descent/)
