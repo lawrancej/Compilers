@@ -1,4 +1,6 @@
 
+// http://matt.might.net/articles/parsing-regex-with-recursive-descent/
+// http://matt.might.net/articles/grammars-bnf-ebnf/
 public class ExpressionParser {
 	String input;
 	int i = 0;
@@ -32,5 +34,4 @@ public class ExpressionParser {
 		eat(c) ;
 		return c ;
 	}
-	
 }
