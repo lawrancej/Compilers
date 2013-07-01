@@ -1,10 +1,18 @@
 #!/usr/bin/env python2
 
 #boiler plate code for the Regex lab by mcgeep
+class Printer(object):
+    def visit(self, node):
+        if isinstance(node, EmptySet): return "0"
+        if isinstance(node, EmptyString): return "e"
+        if isinstance(node, Symbol): return node.symbol
+        if isinstance(node, Star): return node.child.accept(self) + "*"
+        if isinstance(node, Sequence): return node.a.accept(self) + node.b.accept(self)
+        if isinstance(node, Or): return node.a.accept(self) + '|' + node.b.accept(self)
 class Nullable(object):
     def visit(self, node):
-        if isinstance(node, EmptySet): return False 
-        if isinstance(node, EmptyString): return True 
+        if isinstance(node, EmptySet): return False
+        if isinstance(node, EmptyString): return True
         if isinstance(node, Symbol): return False
         if isinstance(node, Star): return True
         if isinstance(node, Sequence): return node.a.accept(self) and node.b.accept(self)
@@ -19,7 +27,7 @@ class Derivative:
         if isinstance(node, Symbol):
             if self.c == node.symbol:
                 return EmptyString()
-            else: 
+            else:
                 return EmptySet()
         if isinstance(node, Star): return Sequence(node.child.accept(self), node)
         if isinstance(node, Sequence):
@@ -32,7 +40,7 @@ class Derivative:
 class Node(object):
     def accept(self, visitor):
         return visitor.visit(self)
-class EmptySet(Node): pass 
+class EmptySet(Node): pass
 class EmptyString(Node): pass
 class Symbol(Node):
     def __init__(self,symbol):
@@ -52,11 +60,14 @@ class Or(Node):
 def match(regex, string):
     d = Derivative()
     nullable = Nullable()
+    printer = Printer()
+    print regex.accept(printer)
     for c in list(string):
         d.c = c
-        regex = regex.accept(d)
+        regex = regex.accept(d) # take the derivative
+        print regex.accept(printer)
     return regex.accept(nullable)
 
 if __name__ == '__main__':
-    print (match(Or(Symbol('a'),Symbol('b')),'a'))
+    print (match(Sequence(Symbol('b'),Symbol('o')),"bo"))
     print (match(Star(Or(Symbol('a'),Symbol('b'))),'a'))
