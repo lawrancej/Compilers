@@ -39,13 +39,13 @@ public class Regex {
 		@Override
 		public String visit(Sequence node) {
 			// TODO Auto-generated method stub
-			return null;
+			return node.a.accept(this) + node.b.accept(this);
 		}
 
 		@Override
 		public String visit(Or node) {
 			// TODO Auto-generated method stub
-			return null;
+			return node.a.accept(this) + '|' + node.b.accept(this);
 		}
 
 	}
