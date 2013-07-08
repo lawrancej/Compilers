@@ -241,6 +241,7 @@ public class Regex {
 		return regex.accept(nullable);
 	}
 	// Match String s literally
+	// TODO: call getInstance()
 	public static Node fromString(String s) {
 		if (s.length() == 0)
 			return new EmptyString();
@@ -249,6 +250,9 @@ public class Regex {
 	}
 	// Create a nested sequence from an array of nodes
 	public static Node seq(Node...s) {
+		return null;
+	}
+	public static Node or(Node...s) {
 		return null;
 	}
 	public static void main(String[] args) {
