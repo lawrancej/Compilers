@@ -34,4 +34,11 @@ public class ExpressionParser {
 		eat(c) ;
 		return c ;
 	}
+	/* LL(1) grammar for expressions
+  E     --> T Etail
+  Etail --> + T Etail | - T Etail | epsilon
+  T     --> F Ttail
+  Ttail --> * F Ttail | / F Ttail | epsilon
+  F     --> ( E ) | num
+	 */
 }
