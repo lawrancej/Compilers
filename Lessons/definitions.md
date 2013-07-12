@@ -54,11 +54,18 @@
 9. What is Brzozowski's derivative of a language?
 10. What is a context-free grammar?
 11. What is a pushdown automaton?
+
+	A finite state machine with a stack.
+
 12. What is an LL (recursive descent) parser?
 13. What is an LR (shift-reduce) parser?
 14. What is a visitor?
 15. What is an abstract syntax tree?
-16. What is optimization?
-17. How do compiler construction techniques apply to "normal" programs?
+16. What are symbol tables?
+17. How does type checking work?
+18. What is optimization?
+19. How does code generation work?
+20. How do compiler construction techniques apply to "normal" programs?
 
 	Parsing configuration files, or anything that deals with string input, will need to interpret it.
+
