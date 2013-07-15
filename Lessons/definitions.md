@@ -57,11 +57,30 @@
 
 	A finite state machine with a stack.
 
-12. What is an LL (recursive descent) parser?
-13. What is an LR (shift-reduce) parser?
+12. What is an LL grammar?
+
+	LL stands for left-right leftmost derivation. An LL grammar is a context-free grammar with no left recursion, no common prefixes for the productions of a nonterminal, and the first and follow sets for a nonterminal are disjoint.
+
+13. What is a recursive descent parser?
+
+	A recursive descent parser parses from the top of an LL grammar downward as it consumes input.
+
+14. What is an LR (shift-reduce) parser?
+
+	LR stands for left-right, rightmost derivation. Shift reduce parsing works by building the parse tree from the bottom up of an LR grammar. The parser shifts (advances) the pointer one position to the right in the input token stream. The left side of the pointer is a partially-constructed parse tree. If the left side of the pointer matches a production, the parser reduces the matched production to the appropriate nonterminal.
+
 14. What is a visitor?
+
+	A visitor is a class for object-oriented tree traversal. The methods of a visitor are specific for each type of node.
+
 15. What is an abstract syntax tree?
-16. What are symbol tables?
+
+	An abstract syntax tree is a high-level tree representation of source code in which nodes consist of language constructs.
+
+16. What is a symbol table?
+
+	A symbol table maps identifiers to type information for declarations of classes, methods, variables, etc. The scanner recognizes identifiers, and the parser connects identifiers to their types. The type checker uses the symbol table to assess consistency among declarations and uses.
+
 17. How does type checking work?
 18. What is optimization?
 19. How does code generation work?
