@@ -3,6 +3,10 @@ package library;
 public class Combinators {
 	String input;
 	int i = 0;
+	/*
+	 * Primitive parser operations:
+	 * next, eat, more, and peek
+	 */
 	// Consume a character (this assumes we don't have a scanner/lexer)
 	private void eat(char c) throws Exception 
 	{
@@ -31,11 +35,13 @@ public class Combinators {
 		eat(c) ;
 		return c ;
 	}
+	// Parser combinators
 	public static interface Visitor<T> {
 		public T visit(Nonterminal p);
 		public T visit(Terminal p);
 	}
 	public static interface Parser {
+		
 	}
 	public static class Nonterminal implements Parser {
 
