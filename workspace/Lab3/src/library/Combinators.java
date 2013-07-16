@@ -143,6 +143,8 @@ public class Combinators {
 			start.accept(builder);
 			nonterminals = builder.set;
 		}
+		// This builder exists just to create the set of nonterminals
+		// without asking the user of the class to supply one.
 		private static class Builder implements Visitor<Void> {
 			public Set<Nonterminal> set;
 			public Builder() {
