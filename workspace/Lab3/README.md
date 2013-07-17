@@ -5,7 +5,7 @@ Do one of the following by yourself or with a parter or two:
 1. Implement the phases of a compiler or interpreter for a language of your choosing or invention.
 
 	* Scanner (lexer/tokenizer). Use Flex, JFlex, or scanners included with the parser tools listed next.
-	* Parser. Use a parser generator tool (e.g., [Bison](http://www.gnu.org/software/bison/), [javacc](https://javacc.java.net/), [antlr](http://www.antlr.org/), [Gold](http://goldparser.org/)) or use a parser combinator library (e.g., [JParsec](https://github.com/abailly/jparsec), [Boost::Spirit](http://boost-spirit.com/home/), [PyParsing](http://pyparsing.wikispaces.com/)).
+	* Parser. Use a parser combinator library (e.g., [JParsec](https://github.com/abailly/jparsec), [Boost::Spirit](http://boost-spirit.com/home/), [PyParsing](http://pyparsing.wikispaces.com/)), or if you like more challenge, use a parser generator tool (e.g., [Bison](http://www.gnu.org/software/bison/), [javacc](https://javacc.java.net/), [antlr](http://www.antlr.org/), [Gold](http://goldparser.org/)).
 
 	To use any parser you will need a grammar. For inspiration, look to the following in increasing order of complexity:
 
@@ -15,7 +15,7 @@ Do one of the following by yourself or with a parter or two:
 	* [C grammar](http://www.lysator.liu.se/c/ANSI-C-grammar-y.html)
 	* [C++ grammar](http://www.nongnu.org/hcb/)
 
-	* Abstract Syntax Tree. See workspace/Lab3/src/compiler/AST.java for inspiration
+	* Abstract Syntax Tree. See workspace/Lab3/src/compiler/AST.java for inspiration.
 	* Type checking (optional)
 	* Optimizer (optional)
 	* Code generation or Interpretation.
@@ -38,6 +38,7 @@ Do one of the following by yourself or with a parter or two:
 3. Create an open educational resource about compilers.
 
 	* Saylor Foundation is interested in Creative Commons licensed textbooks and is offering prizes for them.
+	* [This could be a good starting point](https://github.com/lawrancej/CompilerDesign), as are the course notes from this year and other resources on the web.
 
 4. Propose your own lab (come see me first). Find a way to incorporate compilers into your senior project.
 
