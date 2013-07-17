@@ -4,12 +4,20 @@ Do one of the following by yourself or with a parter or two:
 
 1. Implement the phases of a compiler for a language of your choosing or invention.
 
-	* Scanner (lexer/tokenizer). Flex, JFlex, or roll your own.
-	* Parser. Bison, Yacc, javacc, antlr, Boost::Spirit, PyParsing.
-	* Abstract Syntax Tree
-	* Type checking
-	* Optimizer
-	* Code generation.
+	* Scanner (lexer/tokenizer). Use Flex, JFlex, or scanners included with the parser tools listed next.
+	* Parser. Use a parser generator tool (e.g., [Bison](http://www.gnu.org/software/bison/), [javacc](https://javacc.java.net/), [antlr](http://www.antlr.org/), [Gold](http://goldparser.org/)) or use a parser combinator library (e.g., [JParsec](https://github.com/abailly/jparsec), [Boost::Spirit](http://boost-spirit.com/home/), [PyParsing](http://pyparsing.wikispaces.com/)).
+
+	To use any parser you will need a grammar. For inspiration, look to the following in increasing order of complexity:
+	* [Lisp grammar](http://ragnermagalhaes.blogspot.com/2007/08/bison-lisp-grammar.html)
+	* [Pascal grammar](http://www.cs.utexas.edu/~novak/grammar.html)
+	* [Python grammar](http://docs.python.org/2/reference/grammar.html)
+	* [C grammar](http://www.lysator.liu.se/c/ANSI-C-grammar-y.html)
+	* [C++ grammar](http://www.nongnu.org/hcb/)
+
+	* Abstract Syntax Tree. See workspace/Lab3/src/compiler/AST.java for inspiration
+	* Type checking (optional)
+	* Optimizer (optional)
+	* Code generation or Interpretation.
 
 2. Write a parser combinator library in a language of your choosing.
 
@@ -25,7 +33,6 @@ Do one of the following by yourself or with a parter or two:
 			# E -> T - E
 			E.derives(T, Symbol('+'), E)
 			E.derives(T, Symbol('-'), E)
-
 
 3. Create an open educational resource about compilers.
 
