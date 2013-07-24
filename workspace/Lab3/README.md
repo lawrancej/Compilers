@@ -25,8 +25,8 @@ Do one of the following by yourself or with a parter or two:
 				E.derives(T, Symbol('+'), E)
 				E.derives(T, Symbol('-'), E)
 
-3. Create an open educational resource about compilers. Alternatively, develop a slick 10-15 minute presentation about some compiler topic of your interest in such a way that a freshman in computer science could understand it. Preferably in a way that it could be reused.
-	* Saylor Foundation is interested in Creative Commons licensed textbooks and is offering prizes for them.
+3. Create an open educational resource about compilers. Alternatively, develop a slick 10-15 minute presentation about some compiler topic of your interest in depth in such a way that a freshman in computer science could understand it. Preferably in a way that it could be reused.
+	* Saylor Foundation is interested in [Creative Commons licensed textbooks](http://www.saylor.org/otc/) and is offering prizes for them.
 	* [This could be a good starting point](https://github.com/lawrancej/CompilerDesign), as are the course notes from this year and other resources on the web.
 
 4. Work on an existing open source project that is either a compiler or translator or somewhat related. Fix some bugs. For example:
